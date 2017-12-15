@@ -65,8 +65,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div>
     </section>
     <!-- END section -->
-    
-    
+
     <section class="pb_section pb_section_v1" data-section="about" id="section-about">
       <div class="container">
         <div class="row">
@@ -87,7 +86,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </section>
     <!-- END section -->
 
+    <section class="pb_sm_py_cover text-center cover-bg-black cover-bg-opacity-4" style="background-image: url(../../law/assets/images/1900x1200_img_3.jpg)">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-12">
+          <h2 class="heading mb-3">Free Consultation</h2>
+          <p class="sub-heading mb-5 pb_color-light-opacity-8">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+          <p><a href="#section-sign_in" role="button" class="btn smoothscroll pb_outline-light p-3 rounded-0 pb_font-13 pb_letter-spacing-2">Get Started</a></p>
+        </div>  
+      </div>
+    </div>
+  </section>
+  <!-- END section -->
     
+<?php echo form_open('../user_authentication/user_login_process'); ?>
+<?php
+  echo "<div class='error_msg'>";
+  if (isset($error_message)) {
+  echo $error_message;
+  }
+  echo validation_errors();
+  echo "</div>";
+?>
+
     <section class="pb_section bg-light" data-section="sign_in" id="section-sign_in">
       <div class="container">
         <div class="row justify-content-md-center text-center mb-5">
@@ -98,21 +119,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
         
         <div class="row justify-content-md-center text-center mb-5">
-          <div class="col-lg-7 text-center mb-5">
+          <div class="col-lg-7 text-center">
             <form action="#">
-              <div class="col-md">
-                <div class="form-group">
-                  <label for="name">Enter your username</label>
-                  <input type="text" class="form-control p-3 rounded-0" id="name">
+              <div class="col-lg">
+                <div class="form-group form-group-sm">
+                  <label for="name">Username</label>
+                  <input type="text" class="form-control p-3 rounded-0" id="name" placeholder="Enter your username">
                 </div>
               </div>
-              <div class="col-md">
-                <div class="form-group">
-                  <label for="email">Enter your password</label>
-                  <input type="text" class="form-control p-3 rounded-0" id="email">
+              <div class="col-lg">
+                <div class="form-group form-group-sm">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control p-3 rounded-0" id="password" placeholder="Enter your password">
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group form-group-sm">
                 <input type="submit" class="btn pb_outline-dark pb_font-13 pb_letter-spacing-2 p-3 rounded-0" value="Sign in">
               </div>
             </form>
