@@ -71,7 +71,7 @@ public function user_login_process() {
     if(isset($this->session->userdata['logged_in'])){
       $this->load->view('admin_page');
     }else{
-      $this->load->view('login_form');
+      $this->load->view('welcome_message');
     }
   } else {
     $data = array(
@@ -95,7 +95,7 @@ public function user_login_process() {
       $data = array(
       'error_message' => 'Invalid Username or Password'
       );
-      $this->load->view('login_form', $data);
+      $this->load->view('welcome_message', $data);
     }
   }
 }

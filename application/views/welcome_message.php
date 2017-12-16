@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
 <html lang="en">
 	<head>
-    <!-- 
+    <!--
     More Templates Visit ==> ProBootstrap.com
     Free Template by ProBootstrap.com under the License Creative Commons 3.0 ==> (probootstrap.com/license)
 
@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<title>Homepage</title>
 		<meta name="description" content="Free Bootstrap 4 Theme by ProBootstrap.com">
 		<meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
-    
+
     <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600|Montserrat:200,300,400" rel="stylesheet">
 
 		<link rel="stylesheet" href="../../law/assets/css/bootstrap/bootstrap.css">
@@ -23,8 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link rel="stylesheet" href="../../law/assets/fonts/law-icons/font/flaticon.css">
 
     <link rel="stylesheet" href="../../law/assets/fonts/fontawesome/css/font-awesome.min.css">
-    
-    
+
+
     <link rel="stylesheet" href="../../law/assets/css/slick.css">
     <link rel="stylesheet" href="../../law/assets/css/slick-theme.css">
 
@@ -32,7 +32,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link rel="stylesheet" href="../../law/assets/css/style.css">
 	</head>
 	<body data-spy="scroll" data-target="#pb-navbar" data-offset="200">
-    
+
     <nav class="navbar navbar-expand-lg navbar-dark pb_navbar pb_scrolled-light" id="pb-navbar">
       <div class="container">
         <a class="navbar-brand" href="/">Pump it up!</a>
@@ -59,8 +59,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="sub-heading"><p class="mb-5">IOT Project for <font color="#0066cc">Hardware Synthesis Lab</font> </p>
             <p><a href="#section-sign_in" role="button" class="btn smoothscroll pb_outline-light btn-xl pb_font-13 p-4 rounded-0 pb_letter-spacing-2">SIGN IN</a></p>
             </div>
-            
-          </div>  
+
+          </div>
         </div>
       </div>
     </section>
@@ -80,9 +80,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <img class="img2" src="../../law/assets/images/800x500_img_1.jpg" alt="free Template by ProBootstrap.com">
             </div>
           </div>
-          
+
         </div>
-      </div>  
+      </div>
     </section>
     <!-- END section -->
 
@@ -93,13 +93,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <h2 class="heading mb-3">Free Consultation</h2>
           <p class="sub-heading mb-5 pb_color-light-opacity-8">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
           <p><a href="#section-sign_in" role="button" class="btn smoothscroll pb_outline-light p-3 rounded-0 pb_font-13 pb_letter-spacing-2">Get Started</a></p>
-        </div>  
+        </div>
       </div>
     </div>
   </section>
   <!-- END section -->
-    
-<?php echo form_open('../user_authentication/user_login_process'); ?>
+
+<?php echo form_open('/user_authentication/user_login_process'); ?>
 <?php
   echo "<div class='error_msg'>";
   if (isset($error_message)) {
@@ -117,7 +117,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </div>
         </div>
 
-        
+
         <div class="row justify-content-md-center text-center mb-5">
           <div class="col-lg-7 text-center">
             <form action="#">
@@ -142,7 +142,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div>
     </section>
     <!-- END section -->
-    
+
     <footer class="bg-light" role="contentinfo">
       <div class="container">
         <div class="row text-center">
@@ -161,13 +161,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
       </div>
     </footer>
-    
+
     <!-- loader -->
     <div id="pb_loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#FDA04F"/></svg></div>
 
 
     <script src="../../law/assets/js/jquery.min.js"></script>
-    
+
     <script src="../../law/assets/js/popper.min.js"></script>
     <script src="../../law/assets/js/bootstrap.min.js"></script>
     <script src="../../law/assets/js/slick.min.js"></script>
