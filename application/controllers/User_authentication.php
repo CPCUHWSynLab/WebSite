@@ -95,7 +95,7 @@ public function user_login_process() {
       $data = array(
       'error_message' => 'Invalid Username or Password'
       );
-      $this->load->view('welcome_message', $data);
+    redirect('/welcome');
     }
   }
 }

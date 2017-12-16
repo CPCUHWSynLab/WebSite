@@ -99,18 +99,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </section>
   <!-- END section -->
 
-<?php echo form_open('/user_authentication/user_login_process'); ?>
-<?php
-  echo "<div class='error_msg'>";
-  if (isset($error_message)) {
-  echo $error_message;
-  }
-  echo validation_errors();
-  echo "</div>";
-?>
+<?php echo form_open('/welcome/user_login_process'); ?>
 
     <section class="pb_section bg-light" data-section="sign_in" id="section-sign_in">
       <div class="container">
+          <?php
+                if(isset($error_message) || validation_errors()){
+                    echo "<div class='alert alert-danger'>";
+                      if (isset($error_message)) {
+                      echo $error_message;
+                      }
+                      echo validation_errors();
+                      echo "</div>";
+                }
+            ?>
         <div class="row justify-content-md-center text-center mb-5">
           <div class="col-lg-7">
             <h2 class="mt-0 heading-border-top font-weight-normal">Sign In</h2>

@@ -38,6 +38,7 @@ class Welcome extends CI_Controller {
 		$this->load->helper('security');
 
 		$this->load->library('encryption');
+        
 	}
 
 	public function index()
