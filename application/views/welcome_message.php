@@ -2,88 +2,179 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Welcome to IoT</title>
+	<head>
+    <!-- 
+    More Templates Visit ==> ProBootstrap.com
+    Free Template by ProBootstrap.com under the License Creative Commons 3.0 ==> (probootstrap.com/license)
 
-	<style type="text/css">
+    IMPORTANT: You can do whatever you want with this template but you need to keep the footer link back to ProBootstrap.com
+    -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	::selection { background-color: #E13300; color: white; }
-	::-moz-selection { background-color: #E13300; color: white; }
+		<title>Homepage</title>
+		<meta name="description" content="Free Bootstrap 4 Theme by ProBootstrap.com">
+		<meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+    
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600|Montserrat:200,300,400" rel="stylesheet">
 
-	body {
-		background-color: #fff;
-		margin: 40px;
-		font: 13px/20px normal Helvetica, Arial, sans-serif;
-		color: #4F5155;
-	}
+		<link rel="stylesheet" href="../../law/assets/css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="../../law/assets/fonts/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="../../law/assets/fonts/law-icons/font/flaticon.css">
 
-	a {
-		color: #003399;
-		background-color: transparent;
-		font-weight: normal;
-	}
+    <link rel="stylesheet" href="../../law/assets/fonts/fontawesome/css/font-awesome.min.css">
+    
+    
+    <link rel="stylesheet" href="../../law/assets/css/slick.css">
+    <link rel="stylesheet" href="../../law/assets/css/slick-theme.css">
 
-	h1 {
-		color: #444;
-		background-color: transparent;
-		border-bottom: 1px solid #D0D0D0;
-		font-size: 19px;
-		font-weight: normal;
-		margin: 0 0 14px 0;
-		padding: 14px 15px 10px 15px;
-	}
+    <link rel="stylesheet" href="../../law/assets/css/helpers.css">
+    <link rel="stylesheet" href="../../law/assets/css/style.css">
+	</head>
+	<body data-spy="scroll" data-target="#pb-navbar" data-offset="200">
+    
+    <nav class="navbar navbar-expand-lg navbar-dark pb_navbar pb_scrolled-light" id="pb-navbar">
+      <div class="container">
+        <a class="navbar-brand" href="/">Pump it up!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-navbar" aria-controls="probootstrap-navbar" aria-expanded="false" aria-label="Toggle navigation">
+          <span><i class="ion-navicon"></i></span>
+        </button>
+        <div class="collapse navbar-collapse" id="probootstrap-navbar">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="#section-home">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#section-about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#section-sign_in">Sign in</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- END nav -->
 
-	code {
-		font-family: Consolas, Monaco, Courier New, Courier, monospace;
-		font-size: 12px;
-		background-color: #f9f9f9;
-		border: 1px solid #D0D0D0;
-		color: #002166;
-		display: block;
-		margin: 14px 0 14px 0;
-		padding: 12px 10px 12px 10px;
-	}
+    <section class="pb_cover_v1 text-left cover-bg-black cover-bg-opacity-4" style="background-image: url(../../law/assets/images/1900x1200_img_7.jpg)" id="section-home">
+      <div class="container">
+        <div class="row align-items-center justify-content-end">
+          <div class="col-md-6  order-md-1">
 
-	#body {
-		margin: 0 15px 0 15px;
-	}
+            <h2 class="heading mb-3">Pump it up!</h2>
+            <div class="sub-heading"><p class="mb-5">IOT Project for <font color="#0066cc">Hardware Synthesis Lab</font> </p>
+            <p><a href="#section-sign_in" role="button" class="btn smoothscroll pb_outline-light btn-xl pb_font-13 p-4 rounded-0 pb_letter-spacing-2">SIGN IN</a></p>
+            </div>
+            
+          </div>  
+        </div>
+      </div>
+    </section>
+    <!-- END section -->
 
-	p.footer {
-		text-align: right;
-		font-size: 11px;
-		border-top: 1px solid #D0D0D0;
-		line-height: 32px;
-		padding: 0 10px 0 10px;
-		margin: 20px 0 0 0;
-	}
+    <section class="pb_section pb_section_v1" data-section="about" id="section-about">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5 pr-md-5 pr-sm-0">
+            <h2 class="mt-0 heading-border-top mb-3 font-weight-normal">Who We Are</h2>
+            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="images">
+              <img class="img1 img-fluid" src="../../law/assets/images/600x450_img_2.jpg" alt="free Template by ProBootstrap.com">
+              <img class="img2" src="../../law/assets/images/800x500_img_1.jpg" alt="free Template by ProBootstrap.com">
+            </div>
+          </div>
+          
+        </div>
+      </div>  
+    </section>
+    <!-- END section -->
 
-	#container {
-		margin: 10px;
-		border: 1px solid #D0D0D0;
-		box-shadow: 0 0 8px #D0D0D0;
-	}
-	</style>
-</head>
-<body>
+    <section class="pb_sm_py_cover text-center cover-bg-black cover-bg-opacity-4" style="background-image: url(../../law/assets/images/1900x1200_img_3.jpg)">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-12">
+          <h2 class="heading mb-3">Free Consultation</h2>
+          <p class="sub-heading mb-5 pb_color-light-opacity-8">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+          <p><a href="#section-sign_in" role="button" class="btn smoothscroll pb_outline-light p-3 rounded-0 pb_font-13 pb_letter-spacing-2">Get Started</a></p>
+        </div>  
+      </div>
+    </div>
+  </section>
+  <!-- END section -->
+    
+<?php echo form_open('../user_authentication/user_login_process'); ?>
+<?php
+  echo "<div class='error_msg'>";
+  if (isset($error_message)) {
+  echo $error_message;
+  }
+  echo validation_errors();
+  echo "</div>";
+?>
 
-<div id="container">
-	<h1>Welcome to IoT</h1>
+    <section class="pb_section bg-light" data-section="sign_in" id="section-sign_in">
+      <div class="container">
+        <div class="row justify-content-md-center text-center mb-5">
+          <div class="col-lg-7">
+            <h2 class="mt-0 heading-border-top font-weight-normal">Sign In</h2>
+          </div>
+        </div>
 
-	<div id="body">
-		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
+        
+        <div class="row justify-content-md-center text-center mb-5">
+          <div class="col-lg-7 text-center">
+            <form action="#">
+              <div class="col-lg">
+                <div class="form-group form-group-sm">
+                  <label for="name">Username</label>
+                  <input type="text" class="form-control p-3 rounded-0" id="name" placeholder="Enter your username">
+                </div>
+              </div>
+              <div class="col-lg">
+                <div class="form-group form-group-sm">
+                  <label for="password">Password</label>
+                  <input type="password" class="form-control p-3 rounded-0" id="password" placeholder="Enter your password">
+                </div>
+              </div>
+              <div class="form-group form-group-sm">
+                <input type="submit" class="btn pb_outline-dark pb_font-13 pb_letter-spacing-2 p-3 rounded-0" value="Sign in">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- END section -->
+    
+    <footer class="bg-light" role="contentinfo">
+      <div class="container">
+        <div class="row text-center">
+          <div class="col">
+            <ul class="list-inline">
+              <li class="list-inline-item"><a href="#" class="p-2"><i class="fa fa-facebook"></i></a></li>
+              <li class="list-inline-item"><a href="#" class="p-2"><i class="fa fa-twitter"></i></a></li>
+              <li class="list-inline-item"><a href="#" class="p-2"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-center">
+            <p class="pb_font-14">&copy; 2017 <a href="https://probootstrap.com/">Law</a>. All Rights Reserved. Designed by <a href="https://probootstrap.com/">ProBootstrap</a> Demo Images: Unsplash</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+    <!-- loader -->
+    <div id="pb_loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#FDA04F"/></svg></div>
 
-		<p>If you would like to edit this page you'll find it located at:</p>
-		<code>application/views/welcome_message.php</code>
 
-		<p>The corresponding controller for this page is found at:</p>
-		<code>application/controllers/Welcome.php</code>
+    <script src="../../law/assets/js/jquery.min.js"></script>
+    
+    <script src="../../law/assets/js/popper.min.js"></script>
+    <script src="../../law/assets/js/bootstrap.min.js"></script>
+    <script src="../../law/assets/js/slick.min.js"></script>
 
-		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
-	</div>
+    <script src="../../law/assets/js/jquery.waypoints.min.js"></script>
+    <script src="../../law/assets/js/jquery.easing.1.3.js"></script>
 
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
-</div>
-
-</body>
+    <script src="../../law/assets/js/main.js"></script>
+	</body>
 </html>
