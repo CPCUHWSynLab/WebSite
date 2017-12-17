@@ -62,11 +62,11 @@ class Welcome extends CI_Controller {
 			if(isset($this->session->userdata['logged_in'])){
 			  $this->load->view('admin_page');
 			}else{
-			  // $this->load->view('welcome_message');
-				$this->session->set_userdata('validation_errors', validation_errors());
+			  $this->load->view('welcome_message');
+				/*$this->session->set_userdata('validation_errors', validation_errors());
 				$this->session->mark_as_flash('validation_errors');
 				$this->session->set_userdata('entered',1);
-				redirect('#section-sign_in');
+				redirect('#section-sign_in');*/
 			}
 		  } else {
 			$data = array(
@@ -91,7 +91,7 @@ class Welcome extends CI_Controller {
 			  'error_message' => 'Invalid Username or Password'
 			  );
 			  // $this->load->view('welcome_message', $data);
-				redirect('#section-sign_in');
+				redirect('/welcome');
 			}
 		  }
 		}
