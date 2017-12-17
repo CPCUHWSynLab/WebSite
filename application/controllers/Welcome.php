@@ -55,6 +55,8 @@ class Welcome extends CI_Controller {
 	}
 	public function user_login_process() {
 
+			// print_r($this->input);
+			// die();
 		  $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
 		  $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean');
 
@@ -90,8 +92,7 @@ class Welcome extends CI_Controller {
 			  $data = array(
 			  'error_message' => 'Invalid Username or Password'
 			  );
-			  // $this->load->view('welcome_message', $data);
-				redirect('/welcome');
+			  $this->load->view('welcome_message', $data);
 			}
 		  }
 		}

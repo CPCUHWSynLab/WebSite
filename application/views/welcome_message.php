@@ -107,14 +107,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <form action="#">
               <div class="col-lg">
                 <div class="form-group form-group-sm">
-                  <label for="name">Username</label>
-                  <input type="text" class="form-control p-3 rounded-0" id="name" placeholder="Enter your username">
+                  <label for="username">Username</label>
+                  <input type="text" class="form-control p-3 rounded-0" name="username" id="username" placeholder="Enter your username">
                 </div>
               </div>
               <div class="col-lg">
                 <div class="form-group form-group-sm">
                   <label for="password">Password</label>
-                  <input type="password" class="form-control p-3 rounded-0" id="password" placeholder="Enter your password">
+                  <input type="password" class="form-control p-3 rounded-0" name="password" id="password" placeholder="Enter your password">
                 </div>
               </div>
               <div class="form-group form-group-sm">
