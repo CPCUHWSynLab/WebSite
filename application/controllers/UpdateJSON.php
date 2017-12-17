@@ -9,23 +9,23 @@ public function __construct()
 
 public function index()
 {
-    $countries = $this->European_countries_model->get_countries();
-    $data['countries'] = $countries;
-
-    $response = array();
-    $posts = array();
-    foreach ($countries as $country)
-    {
-        $posts[] = array(
-            "title"                 =>  $country->euro_id,
-            "flag"                  =>  $country->flag_name,
-            "population"            =>  $country->population,
-            "avg_annual_gcountryth" =>  $country->avg_annual_gcountryth,
-            "date"                  =>  $country->date
-        );
-    }
-    $response['posts'] = $posts;
-    echo json_encode($response,TRUE);
+    // $countries = $this->European_countries_model->get_countries();
+    // $data['countries'] = $countries;
+    //
+    // $response = array();
+    // $posts = array();
+    // foreach ($countries as $country)
+    // {
+    //     $posts[] = array(
+    //         "title"                 =>  $country->euro_id,
+    //         "flag"                  =>  $country->flag_name,
+    //         "population"            =>  $country->population,
+    //         "avg_annual_gcountryth" =>  $country->avg_annual_gcountryth,
+    //         "date"                  =>  $country->date
+    //     );
+    // }
+    // $response['posts'] = $posts;
+    // echo json_encode($response,TRUE);
 
     //If the json is correct, you can then write the file and load the view
 
@@ -46,7 +46,15 @@ public function index()
 public function urlrequest(){
 
   //This will get the JSON data from NETPIE server
-  print file_get_contents("https://api.netpie.io/feed/CPCUSoilhumidity?apikey=o9dYEQAyVBqDmWn1SORwfFTq7afHhYjd&granularity=10minutes&since=24hours&filter=humidity");
+  $data = file_get_contents("https://api.netpie.io/feed/CPCUSoilhumidity?apikey=o9dYEQAyVBqDmWn1SORwfFTq7afHhYjd&granularity=10minutes&since=24hours&filter=humidity");
+  if ( ! write_file('./data/user1JSON.json', $data))
+  {
+          echo 'Unable to write the file';
+  }
+  else
+  {
+          echo 'File written!';
+  }
 }
 
 }?>
