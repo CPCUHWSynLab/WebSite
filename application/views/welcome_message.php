@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </nav>
     <!-- END nav -->
 
-    <section class="pb_cover_v1 text-left cover-bg-black cover-bg-opacity-4" style="background-image: url(../../law/assets/images/1900x1200_img_71.jpg)" id="section-home">
+    <section class="pb_cover_v1 text-left cover-bg-black cover-bg-opacity-4" style="background-image: url(../../law/assets/images/1900x1200_img_7_1.jpg)" id="section-home">
       <div class="container">
         <div class="row align-items-center justify-content-end">
           <div class="col-md-6  order-md-1">
@@ -129,16 +129,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <section class="pb_sm_py_cover text-center cover-bg-black cover-bg-opacity-4" style="background-image: url(../../law/assets/images/1900x1200_img_3.jpg)">
     <div class="container">
-      <div class="row text-center">
-        <div class="col-md-12">
-          <h2 class="heading mt-0 mb-3">Developers</h2>
-          <p class="sub-heading pb_color-light-opacity-8">MEMBER1</p>
-          <p class="sub-heading pb_color-light-opacity-8">MEMBER2</p>
-          <p class="sub-heading pb_color-light-opacity-8">MEMBER3</p>
-          <p class="sub-heading pb_color-light-opacity-8">Panayu Keelawat 5831036921</p>
-          <p class="sub-heading pb_color-light-opacity-8">Siraphat Gruysiriwong 5831078221</p>
-        </div>
-
+      <div class="col-md-12">
+        <h2 class="heading mt-0 mb-3">Developers</h2>
+        <p class="sub-heading pb_color-light-opacity-8">MEMBER1</p>
+        <p class="sub-heading pb_color-light-opacity-8">MEMBER2</p>
+        <p class="sub-heading pb_color-light-opacity-8">MEMBER3</p>
+        <p class="sub-heading pb_color-light-opacity-8">Panayu Keelawat 5831036921</p>
+        <p class="sub-heading pb_color-light-opacity-8">Siraphat Gruysiriwong 5831078221</p>
+      </div>
     </div>
   </section>
   <!-- END section -->
