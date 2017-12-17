@@ -50,16 +50,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </nav>
     <!-- END nav -->
 
-    <section class="pb_cover_v1 text-left cover-bg-black cover-bg-opacity-4" style="background-image: url(../../law/assets/images/1900x1200_img_7.jpg)" id="section-home">
+    <section class="pb_cover_v1 text-left cover-bg-black cover-bg-opacity-4" style="background-image: url(../../law/assets/images/1900x1200_img_71.jpg)" id="section-home">
       <div class="container">
         <div class="row align-items-center justify-content-end">
           <div class="col-md-6  order-md-1">
-
             <h2 class="heading mb-3">Pump it up!</h2>
             <div class="sub-heading"><p class="mb-5">IOT Project for <font color="#0066cc">Hardware Synthesis Lab</font> </p>
             <p><a href="#section-sign_in" role="button" class="btn smoothscroll pb_outline-light btn-xl pb_font-13 p-4 rounded-0 pb_letter-spacing-2">SIGN IN</a></p>
             </div>
-
           </div>
         </div>
       </div>
@@ -86,23 +84,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </section>
     <!-- END section -->
 
-    <section class="pb_sm_py_cover text-center cover-bg-black cover-bg-opacity-4" style="background-image: url(../../law/assets/images/1900x1200_img_3.jpg)">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-md-12">
-          <h2 class="heading mb-3">Free Consultation</h2>
-          <p class="sub-heading mb-5 pb_color-light-opacity-8">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-          <p><a href="#section-sign_in" role="button" class="btn smoothscroll pb_outline-light p-3 rounded-0 pb_font-13 pb_letter-spacing-2">Get Started</a></p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- END section -->
 
-<?php echo form_open('/welcome/user_login_process'); ?>
+<?php echo form_open('/welcome/user_login_process#section-sign_in'); ?>
 
     <section class="pb_section bg-light" data-section="sign_in" id="section-sign_in">
-      <div class="container">
+      <div class="container" style="height:450px;">
           <?php
                 if(isset($error_message) || validation_errors()){
                     echo "<div class='alert alert-danger'>";
@@ -113,15 +99,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                       echo "</div>";
                 }
             ?>
-        <div class="row justify-content-md-center text-center mb-5">
+        <div class="row justify-content-md-center text-center">
           <div class="col-lg-7">
-            <h2 class="mt-0 heading-border-top font-weight-normal">Sign In</h2>
+            <h2 class="heading-border-top font-weight-normal">Sign In</h2>
           </div>
-        </div>
-
-
-        <div class="row justify-content-md-center text-center mb-5">
-          <div class="col-lg-7 text-center">
+          <div class="mt-1 col-lg-7 text-center">
             <form action="#">
               <div class="col-lg">
                 <div class="form-group form-group-sm">
@@ -136,7 +118,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </div>
               </div>
               <div class="form-group form-group-sm">
-                <input type="submit" class="btn pb_outline-dark pb_font-13 pb_letter-spacing-2 p-3 rounded-0" value="Sign in">
+                  <input type="submit" class="btn pb_outline-dark pb_font-13 pb_letter-spacing-2 p-3 rounded-0" value="Sign in">
               </div>
             </form>
           </div>
@@ -145,7 +127,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </section>
     <!-- END section -->
 
-    <footer class="bg-light" role="contentinfo">
+    <section class="pb_sm_py_cover text-center cover-bg-black cover-bg-opacity-4" style="background-image: url(../../law/assets/images/1900x1200_img_3.jpg)">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h2 class="heading mt-0 mb-3">Developer</h2>
+          <p class="sub-heading pb_color-light-opacity-8">MEMBER1</p>
+          <p class="sub-heading pb_color-light-opacity-8">MEMBER2</p>
+          <p class="sub-heading pb_color-light-opacity-8">MEMBER3</p>
+          <p class="sub-heading pb_color-light-opacity-8">MEMBER4</p>
+          <p class="sub-heading pb_color-light-opacity-8">Siraphat Gruysiriwong 5831078221</p>
+        </div>
+
+    </div>
+  </section>
+  <!-- END section -->
+
+    <footer class="bg-light" style="padding:10px;"  role="contentinfo">
       <div class="container">
         <div class="row text-center">
           <div class="col">

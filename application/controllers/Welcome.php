@@ -38,13 +38,20 @@ class Welcome extends CI_Controller {
 		$this->load->helper('security');
 
 		$this->load->library('encryption');
-        
+
 	}
 
 	public function index()
 	{
 		$this->load->helper('url');
-		$this->load->view('welcome_message');
+		if($this->session->userdata('entered')==1 && $this->session->userdata('validation_errors')){
+			$data['validation_errors'] = $this->session->userdata('validation_errors');
+			$this->load->view('welcome_message',$data);
+		}
+		else{
+			$this->session->set_userdata('entered',1);
+			$this->load->view('welcome_message');
+		}
 	}
 	public function user_login_process() {
 
@@ -55,7 +62,11 @@ class Welcome extends CI_Controller {
 			if(isset($this->session->userdata['logged_in'])){
 			  $this->load->view('admin_page');
 			}else{
-			  $this->load->view('welcome_message');
+			  // $this->load->view('welcome_message');
+				$this->session->set_userdata('validation_errors', validation_errors());
+				$this->session->mark_as_flash('validation_errors');
+				$this->session->set_userdata('entered',1);
+				redirect('#section-sign_in');
 			}
 		  } else {
 			$data = array(
@@ -79,7 +90,8 @@ class Welcome extends CI_Controller {
 			  $data = array(
 			  'error_message' => 'Invalid Username or Password'
 			  );
-			  $this->load->view('login_form', $data);
+			  // $this->load->view('welcome_message', $data);
+				redirect('#section-sign_in');
 			}
 		  }
 		}
