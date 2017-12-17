@@ -96,4 +96,17 @@ class Welcome extends CI_Controller {
 			}
 		  }
 		}
+
+		// Logout from admin page
+		public function logout() {
+
+		// Removing session data
+		$sess_array = array(
+		'username' => ''
+		);
+		$this->session->unset_userdata('logged_in', $sess_array);
+		$data['message_display'] = 'Successfully Logout';
+		$this->load->view('welcome_message', $data);
+		}
+
 }
