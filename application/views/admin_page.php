@@ -100,13 +100,13 @@ include 'notifutil.php'
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Index">
           <a class="nav-link" href="/index.php/welcome/user_login_process#section-sign_in">
-            <i class="fa fa-fw fa-list"></i>
+            <i class="fa fa-fw fa-home"></i>
             <span class="nav-link-text">Index</span>
           </a>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Settings">
           <a class="nav-link" href="charts.html">
             <i class="fa fa-fw fa-wrench"></i>
             <span class="nav-link-text">Settings</span>
@@ -132,7 +132,7 @@ include 'notifutil.php'
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active">Pump It Up! Statistics</li>
+        <li class="breadcrumb-item active"><font color="#0080FF">Pump It Up!</font> Statistics</li>
       </ol>
       <!-- Icon Cards-->
       <div class="row">
@@ -142,7 +142,7 @@ include 'notifutil.php'
               <div class="card-body-icon">
                 <i class="fa fa-fw fa-tint"></i>
               </div>
-              <div class="mr-5">Current Moisture: 9001</div>
+              <div class="mr-5">Current Moisture : 9001</div>
             </div>
           </div>
         </div>
@@ -152,7 +152,7 @@ include 'notifutil.php'
               <div class="card-body-icon">
                 <i class="fa fa-fw fa-shower"></i>
               </div>
-              <div class="mr-5">Last Watered: XX/XX/XXXX XX:XX</div>
+              <div class="mr-5">Last Watered : XX/XX/XXXX XX:XX</div>
             </div>
           </div>
         </div>
@@ -162,7 +162,7 @@ include 'notifutil.php'
               <div class="card-body-icon">
                 <i class="fa fa-fw fa-cog"></i>
               </div>
-              <div class="mr-5">Current Mode: Manual</div>
+              <div class="mr-5">Current Mode : Manual</div>
             </div>
           </div>
         </div>
@@ -172,7 +172,7 @@ include 'notifutil.php'
               <div class="card-body-icon">
                 <i class="fa fa-fw fa-tachometer"></i>
               </div>
-              <div class="mr-5">Current Threshold: 9002</div>
+              <div class="mr-5">Current Threshold : 9002</div>
             </div>
           </div>
         </div>
