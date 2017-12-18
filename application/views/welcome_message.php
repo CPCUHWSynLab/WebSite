@@ -50,12 +50,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </nav>
     <!-- END nav -->
 
-    <section class="pb_cover_v1 text-left cover-bg-black cover-bg-opacity-4" style="background-image: url(../../law/assets/images/1900x1200_img_7_1.jpg)" id="section-home">
+    <section class="pb_cover_v1 text-left cover-bg-black cover-bg-opacity-1" style="background-image: url(../../law/assets/images/1900x1200_img_7_2.jpg)" id="section-home">
       <div class="container">
         <div class="row align-items-center justify-content-end">
           <div class="col-md-6  order-md-1">
             <h2 class="heading mb-3">Pump it up!</h2>
-            <div class="sub-heading"><p class="mb-5">IOT Project for <font color="#0066cc">Hardware Synthesis Lab</font> </p>
+            <div class="sub-heading"><p class="mb-5">Automatic Watering System for Plants</p>
             <p><a href="#section-sign_in" role="button" class="btn smoothscroll pb_outline-light btn-xl pb_font-13 p-4 rounded-0 pb_letter-spacing-2">SIGN IN</a></p>
             </div>
           </div>
@@ -68,14 +68,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <div class="container">
         <div class="row">
           <div class="col-lg-5 pr-md-5 pr-sm-0">
-            <h2 class="mt-0 heading-border-top mb-3 font-weight-normal">Who We Are</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-          </div>
+            <h2 class="mt-0 heading-border-top mb-3 font-weight-normal">Take care of your plants, Wherever you are.</h2>
+            <p>Pump It Up! will help you take care of your houseplant even while you are away.</p>
+            <p>With the integration of humidity sensor and internet functionality, there are wide-ranged functionalities avaliable.</p>
+            <p>Watch over your plant status and command over the internet, or choose to water the plant automatically.</p>
+            <p>Try out Pump It Up! today, looking after houseplant will never be any easier!</p>
+            </div>
           <div class="col-lg-7">
             <div class="images">
-              <img class="img1 img-fluid" src="../../law/assets/images/600x450_img_2.jpg" alt="free Template by ProBootstrap.com">
-              <img class="img2" src="../../law/assets/images/800x500_img_1.jpg" alt="free Template by ProBootstrap.com">
+              <img class="img2" src="../../law/assets/images/800x500_img_1_1.jpg" alt="free Template by ProBootstrap.com">
+              <img class="img1 img-fluid" src="../../law/assets/images/600x450_img_2_1.jpg" alt="free Template by ProBootstrap.com">
             </div>
           </div>
 
@@ -131,9 +133,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="container">
       <div class="col-md-12">
         <h2 class="heading mt-0 mb-3">Developers</h2>
-        <p class="sub-heading pb_color-light-opacity-8">MEMBER1</p>
+        <p class="sub-heading pb_color-light-opacity-8">Pakanan Aimherungilas 5830406221</p>
         <p class="sub-heading pb_color-light-opacity-8">MEMBER2</p>
-        <p class="sub-heading pb_color-light-opacity-8">MEMBER3</p>
+        <p class="sub-heading pb_color-light-opacity-8">Nitit Kaweeratanakit 5831033021</p>
         <p class="sub-heading pb_color-light-opacity-8">Panayu Keelawat 5831036921</p>
         <p class="sub-heading pb_color-light-opacity-8">Siraphat Gruysiriwong 5831078221</p>
       </div>
@@ -146,15 +148,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="row text-center">
           <div class="col">
             <ul class="list-inline">
-              <li class="list-inline-item"><a href="#" class="p-2"><i class="fa fa-facebook"></i></a></li>
-              <li class="list-inline-item"><a href="#" class="p-2"><i class="fa fa-twitter"></i></a></li>
-              <li class="list-inline-item"><a href="#" class="p-2"><i class="fa fa-linkedin"></i></a></li>
+              <li class="list-inline-item"><a href="#section-home" class="p-2"><i class="fa fa-facebook"></i></a></li>
+              <li class="list-inline-item"><a href="#section-home" class="p-2"><i class="fa fa-twitter"></i></a></li>
+              <li class="list-inline-item"><a href="#section-home" class="p-2"><i class="fa fa-linkedin"></i></a></li>
             </ul>
           </div>
         </div>
         <div class="row">
           <div class="col text-center">
-            <p class="pb_font-14">&copy; 2017 <a href="https://probootstrap.com/">Law</a>. All Rights Reserved. Designed by <a href="https://probootstrap.com/">ProBootstrap</a> Demo Images: Unsplash</p>
+            <p class="pb_font-14">&copy; 2017 Internet of Things (IoT) Project for <font color="#0066cc">Hardware Synthesis Lab</font>.</p>
           </div>
         </div>
       </div>
