@@ -9,7 +9,7 @@ public function __construct()
 
 public function index()
 {
-  
+
 }
 
 public function urlrequest(){
@@ -23,6 +23,20 @@ public function urlrequest(){
   else
   {
           echo 'File written!';
+  }
+}
+
+public function updatehistory(){
+  if(!empty($_POST)){
+    $data = json_encode($_POST['data']);
+    if ( ! write_file('./data/histqueue.json', $data))
+    {
+            echo 'Unable to write the file';
+    }
+    else
+    {
+            echo 'File written!';
+    }
   }
 }
 

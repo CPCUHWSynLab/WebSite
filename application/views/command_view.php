@@ -35,6 +35,7 @@
 
   <link rel="stylesheet" href="../../law/assets/css/helpers.css">
   <link rel="stylesheet" href="../../law/assets/css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <style>
       body{
         padding-top: 100px;
@@ -53,9 +54,49 @@
      secret: SECRET,
      alias : ALIAS
      });
+
+ function readTextFile(file, callback) {
+   var rawFile = new XMLHttpRequest();
+   rawFile.overrideMimeType("application/json");
+   rawFile.open("GET", file, true);
+   rawFile.onreadystatechange = function() {
+       if (rawFile.readyState === 4 && rawFile.status == "200") {
+           callback(rawFile.responseText);
+       }
+   }
+   rawFile.send(null);
+ }
+
   function toggle() {
    if(document.getElementById("button").innerText=="OFF"){
      microgear.chat('pieled','1');
+     readTextFile("../../data/histqueue.json", function(text){
+         var data = JSON.parse(text);
+         console.log(data.queue);
+         var obj = {};
+         obj.type = 1;
+         obj.timestamp = Math.trunc(Date.now()/1000);
+         data.queue.push(obj);
+         data.queue.shift();
+         $(document).ready(function() {
+            //function () {
+                var sendData = data;
+                console.log("send data = ");
+                console.log(sendData);
+                $.ajax({
+                    url: 'updatejson/updatehistory',    //Your api url
+                    type: 'POST',   //type is any HTTP method
+                    data: {
+                        data: sendData
+                    },      //Data as js object
+                    success: function () {
+                      console.log("sed lana");
+                    }
+                });
+              //}
+        });
+     });
+
    }
    else{
      microgear.chat('pieled','0');
@@ -95,7 +136,7 @@
   <div class="container">
   <div id="data">Waiting for connection</div>
   <center>
-  <button onclick="toggle()" id="button">off</button>
+  <button onclick="toggle()" id="button">OFF</button>
   </center>
 </div>
 </body>
