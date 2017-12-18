@@ -26,6 +26,63 @@ include 'notifutil.php'
   <link href="../../stat/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="../../stat/css/sb-admin.css" rel="stylesheet">
+  <script>
+  window.onload = function () {
+
+  var dps = []; // dataPoints
+  var chart = new CanvasJS.Chart("chartContainer", {
+  	title :{
+  		text: "Humidity",
+      fontFamily: "TH SarabunPSK",
+      fontWeight: "bold",
+      fontSize: 45
+  	},
+    axisX: {
+      labelFontFamily: "TH SarabunPSK",
+      labelFontSize: 18
+    },
+  	axisY: {
+      labelFontFamily: "TH SarabunPSK",
+      labelFontSize: 18,
+  		includeZero: false
+  	},
+  	data: [{
+  		type: "splineArea",
+      color: "rgba(54,158,173,.7)",
+  		dataPoints: dps
+  	}]
+  });
+
+  var xVal = 0;
+  var yVal = 100;
+  var updateInterval = 1000;
+  var dataLength = 20; // number of dataPoints visible at any point
+
+  var updateChart = function (count) {
+
+  	count = count || 1;
+
+  	for (var j = 0; j < count; j++) {
+  		yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
+  		dps.push({
+  			x: xVal,
+  			y: yVal
+  		});
+  		xVal++;
+  	}
+
+  	if (dps.length > dataLength) {
+  		dps.shift();
+  	}
+
+  	chart.render();
+  };
+
+  updateChart(dataLength);
+  setInterval(function(){updateChart()}, updateInterval);
+
+  }
+  </script>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -124,15 +181,8 @@ include 'notifutil.php'
       <!-- Area Chart Example-->
       <div class="row">
         <div class="col-lg-8">
-          <!-- Example Bar Chart Card-->
-          <div class="card mb-3">
-            <div class="card-header">
-                <i class="fa fa-area-chart"></i> Stat</div>
-              <div class="card-body">
-                <canvas id="myAreaChart" width="100%" height="40"></canvas>
-              </div>
-              <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-          </div>
+          <div id="chartContainer" style="height: 100%; width: 100%; margin:0 auto;"></div>
+          <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
           <!-- /Card Columns-->
         </div>
         <div class="col-lg-4">
@@ -232,4 +282,3 @@ include 'notifutil.php'
 </body>
 
 </html>
-
