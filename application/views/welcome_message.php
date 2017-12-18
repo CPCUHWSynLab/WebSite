@@ -134,7 +134,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <div class="col-md-12">
         <h2 class="heading mt-0 mb-3">Developers</h2>
         <p class="sub-heading pb_color-light-opacity-8">Pakanan Aimherungilas 5830406221</p>
-        <p class="sub-heading pb_color-light-opacity-8">MEMBER2</p>
+        <p class="sub-heading pb_color-light-opacity-8">Nuttapod Liknapichitkul 5831019221</p>
         <p class="sub-heading pb_color-light-opacity-8">Nitit Kaweeratanakit 5831033021</p>
         <p class="sub-heading pb_color-light-opacity-8">Panayu Keelawat 5831036921</p>
         <p class="sub-heading pb_color-light-opacity-8">Siraphat Gruysiriwong 5831078221</p>
