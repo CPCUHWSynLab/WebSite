@@ -33,8 +33,8 @@ public function urlrequest(){
       $histqueue = json_decode($histqueuefile, true);
       $histqueue = $histqueue['queue'];
       $arr = array(
-        "type" : 0,     //0 means dry
-        "timestamp" : $data['lastest_data'][0][0];
+        "type" => 0,
+        "timestamp" => $data['lastest_data'][0][0]
       );
       array_push($histqueue, $arr);
       array_shift($histqueue);
@@ -54,8 +54,8 @@ public function urlrequest(){
       $histqueue = json_decode($histqueuefile, true);
       $histqueue = $histqueue['queue'];
       $arr = array(
-        "type" : 1,     //1 means watering
-        "timestamp" : $data['lastest_data'][0][0];
+        "type" => 1,
+        "timestamp" => $data['lastest_data'][0][0]
       );
       array_push($histqueue, $arr);
       array_shift($histqueue);
