@@ -181,7 +181,7 @@ include 'notifutil.php'
       <!-- Area Chart Example-->
       <div class="row">
         <div class="col-lg-8">
-          <div id="chartContainer" style="height: 100%; width: 100%; margin:0 auto;"></div>
+          <div id="chartContainer" style="height: 90%; width: 100%; margin:0 auto;"></div>
           <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
           <!-- /Card Columns-->
         </div>
