@@ -164,7 +164,7 @@ include 'notifutil.php'
   };*/
 //====
 var arrdata=[];
-var xpos=0;
+// var xpos=0;
 var updateChart = function (count) {
 
   count = count || 1;
@@ -177,49 +177,66 @@ var updateChart = function (count) {
       //dps = [];
       //var i = 0;
     });
-    //console.log(arrdata);
-  for (var j = 0; j < count&&arrdata.length != 0; j++) {
-    if(xpos>=arrdata.length){
-      xVal = 0;
-      yVal = 0;
-    }else{
-      var date = new Date(arrdata[xpos][0]);
-      var hours = date.getHours();
-      var minutes = date.getMinutes();
-      var seconds = date.getSeconds();
-      var formattedTime = hours*10000+ minutes*100+ seconds;
-      //console.log("test");
-      //console.log(arrdata[xpos][0]);
-      //console.log("date"+date);
-      //console.log("formattedTime"+formattedTime);
-      /*var minutes = "0"+date.getMinutes();
-      var seconds = "0"+date.getSeconds();
-      var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);*/
-      //console.log(formattedTime);
-      //console.log(minutes);
-      //console.log(seconds);
-      xVal = formattedTime;//arrdata[xpos][0];//formattedTime;
-      yVal = arrdata[xpos][1];
-    }
-    if(xpos<20){
-      xpos++;
-    }
+  console.log(arrdata.length);
+  if(dps[0] == null){
+    for (var j = 0; j < count && arrdata.length != 0; j++) {
+      // if(xpos>=arrdata.length){
+      //   // xVal = 0;
+      //   // yVal = 0;
+      // }else{
+        var pos = (arrdata.length - count) + j;
+        var date = new Date(arrdata[pos][0]);
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var seconds = date.getSeconds();
+        var formattedTime = hours*10000+ minutes*100+ seconds;
+        //console.log("test");
+        //console.log(arrdata[xpos][0]);
+        //console.log("date"+date);
+        //console.log("formattedTime"+formattedTime);
+        /*var minutes = "0"+date.getMinutes();
+        var seconds = "0"+date.getSeconds();
+        var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);*/
+        //console.log(formattedTime);
+        //console.log(minutes);
+        //console.log(seconds);
+        xVal = formattedTime;//arrdata[xpos][0];//formattedTime;
+        yVal = arrdata[pos][1];
+      // }
+      // if(xpos<20){
+      //   xpos++;
+      // }
 
-    //yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
-    //console.log(arrdata.length);
-    if(xpos<=arrdata.length){
-    dps.push({
-      x: xVal,
-      y: yVal
-    });
+      //yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
+      //console.log(arrdata.length);
+      if(pos<arrdata.length){
+        dps.push({
+          x: xVal,
+          y: yVal
+        });
+      }
+      //xVal++;
     }
-    //xVal++;
   }
-
-  if (dps.length > dataLength) {
-    dps.shift();
-  }
-  console.log(dps);
+  // else{
+  //   if(arrdata[arrdata.length][0]!=dps[dps.length-1][0]){
+  //     var date = new Date(arrdata[dps.length][0]);
+  //     var hours = date.getHours();
+  //     var minutes = date.getMinutes();
+  //     var seconds = date.getSeconds();
+  //     var formattedTime = hours*10000+ minutes*100+ seconds;
+  //     xVal = formattedTime;//arrdata[xpos][0];//formattedTime;
+  //     yVal = arrdata[dps.length][1];
+  //     dps.push({
+  //           x: xVal,
+  //           y: yVal
+  //     });
+  //   }
+  // }
+  // if (dps.length > dataLength) {
+  //   dps.shift();
+  // }
+  console.log(dps.length);
   chart.render();
 };
 //====
