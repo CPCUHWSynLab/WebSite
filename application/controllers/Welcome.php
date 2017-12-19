@@ -44,13 +44,18 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		$this->load->helper('url');
-		if($this->session->userdata('entered')==1 && $this->session->userdata('validation_errors')){
-			$data['validation_errors'] = $this->session->userdata('validation_errors');
-			$this->load->view('welcome_message',$data);
+		if(isset($this->session->userdata['logged_in'])){
+			redirect('/welcome/user_login_process');
 		}
 		else{
-			$this->session->set_userdata('entered',1);
-			$this->load->view('welcome_message');
+			if($this->session->userdata('entered')==1 && $this->session->userdata('validation_errors')){
+				$data['validation_errors'] = $this->session->userdata('validation_errors');
+				$this->load->view('welcome_message',$data);
+			}
+			else{
+				$this->session->set_userdata('entered',1);
+				$this->load->view('welcome_message');
+			}
 		}
 	}
 	public function user_login_process() {
@@ -107,6 +112,15 @@ class Welcome extends CI_Controller {
 		$this->session->unset_userdata('logged_in', $sess_array);
 		$data['message_display'] = 'Successfully Logout';
 		$this->load->view('welcome_message', $data);
+		}
+
+		public function settings(){
+			if(isset($this->session->userdata['logged_in'])){
+					$this->load->view('settings');
+			}
+			else{
+				$this->load->view('welcome_message');
+			}
 		}
 
 }

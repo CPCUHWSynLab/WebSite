@@ -101,13 +101,13 @@ include 'notifutil.php'
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Index">
-          <a class="nav-link" href="/index.php/welcome/user_login_process#section-sign_in">
+          <a class="nav-link" href="/index.php/welcome/user_login_process">
             <i class="fa fa-fw fa-home"></i>
             <span class="nav-link-text">Index</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Settings">
-          <a class="nav-link" href="charts.html">
+          <a class="nav-link" href="./settings">
             <i class="fa fa-fw fa-wrench"></i>
             <span class="nav-link-text">Settings</span>
           </a>
