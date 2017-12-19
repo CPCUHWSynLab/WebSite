@@ -26,6 +26,67 @@ include 'notifutil.php'
   <link href="../../stat/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="../../stat/css/sb-admin.css" rel="stylesheet">
+  <script src="https://cdn.netpie.io/microgear.js"></script>
+  <script>
+    const APPID = "CPCUHWSynLab";
+    const KEY = "L5NiGlMSwnpT1Gv";
+    const SECRET = "OAhEC66LXmLiBst6tG1nUZxNb";
+    const ALIAS = "switch";
+    var microgear = Microgear.create({
+     key: KEY,
+     secret: SECRET,
+     alias : ALIAS
+     });
+
+ function readTextFile(file, callback) {
+   var rawFile = new XMLHttpRequest();
+   rawFile.overrideMimeType("application/json");
+   rawFile.open("GET", file, true);
+   rawFile.onreadystatechange = function() {
+       if (rawFile.readyState === 4 && rawFile.status == "200") {
+           callback(rawFile.responseText);
+       }
+   }
+   rawFile.send(null);
+ }
+
+  function toggle() {
+   microgear.chat('pieled','1');
+   readTextFile("../../data/histqueue.json", function(text){
+       var data = JSON.parse(text);
+       console.log(data.queue);
+       var obj = {};
+       obj.type = 1;
+       obj.timestamp = Math.trunc(Date.now()/1000);
+       data.queue.push(obj);
+       data.queue.shift();
+       data.last_watered = obj.timestamp;
+       $(document).ready(function() {
+          var sendData = data;
+          $.ajax({
+              url: '../updatejson/updatehistory',    //Your api url
+              type: 'POST',   //type is any HTTP method
+              data: {
+                  data: sendData
+              },      //Data as js object
+              success: function () {
+                console.log("success");
+              }
+          });
+      });
+   });
+   // microgear.chat('pieled/state','0');
+  }
+   microgear.on('message',function(topic,msg) {
+     
+    });
+      microgear.on('connected', function() {
+      microgear.setAlias(ALIAS);
+      console.log("Connected to NETPIE");
+    });
+    microgear.connect(APPID);
+  </script>
+
   <script>
   window.onload = function () {
 
@@ -38,6 +99,7 @@ include 'notifutil.php'
       fontSize: 45
   	},
     axisX: {
+      valueFormatString: "00:00:00",
       labelFontFamily: "TH SarabunPSK",
       labelFontSize: 18
     },
@@ -53,34 +115,117 @@ include 'notifutil.php'
   	}]
   });
 
-  var xVal = 0;
-  var yVal = 100;
+  var xVal=0;
+  var yVal=100;
   var updateInterval = 1000;
   var dataLength = 20; // number of dataPoints visible at any point
 
-  var updateChart = function (count) {
+  function readTextFile(file, callback) {
+    var rawFile = new XMLHttpRequest();
+    rawFile.overrideMimeType("application/json");
+    rawFile.open("GET", file, true);
+    rawFile.onreadystatechange = function() {
+        if (rawFile.readyState === 4 && rawFile.status == "200") {
+            callback(rawFile.responseText);
+        }
+    }
+    rawFile.send(null);
+  }
 
-  	count = count || 1;
 
-  	for (var j = 0; j < count; j++) {
-  		yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
-  		dps.push({
-  			x: xVal,
-  			y: yVal
-  		});
-  		xVal++;
-  	}
+//======
+  /*var updateChart = function (count) {
+    readTextFile("../../data/user1JSON.json", function(text){
+        var data = JSON.parse(text);
+        var arrdata = data.data[0].values;
+        arrdata.push(data.lastest_data[0].values[0]);
+        dps = [];
+        var i = 0;
+        for (var j = 0; j < 20 && arrdata.length != 0 ; j++) {
+          xVal = arrdata[arrdata.length-1][0];
+          yVal = arrdata[arrdata.length-1][1];
+          var date = new Date(xVal*1000);
+          var hours = date.getHours();
+          var minutes = "0"+date.getMinutes();
+          var seconds = "0"+date.getSeconds();
+          var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+          var tmp = {};
+          tmp.x = formattedTime;
+          tmp.y = yVal;
+          dps.push(tmp);
+          arrdata.pop();
+      	}
+        if (dps.length > dataLength) {
+      		dps.shift();
+      	}
+        console.log(dps);
+      	chart.render();
+    });
+  };*/
+//====
+var arrdata=[];
+var xpos=0;
+var updateChart = function (count) {
 
-  	if (dps.length > dataLength) {
-  		dps.shift();
-  	}
+  count = count || 1;
 
-  	chart.render();
-  };
+  readTextFile("../../data/user1JSON.json", function(text){
+      var data = JSON.parse(text);
+      arrdata = data.data[0].values;
+      arrdata.push(data.lastest_data[0].values[0]);
+      //console.log(arrdata);
+      //dps = [];
+      //var i = 0;
+    });
+    //console.log(arrdata);
+  for (var j = 0; j < count&&arrdata.length != 0; j++) {
+    if(xpos>=arrdata.length){
+      xVal = 0;
+      yVal = 0;
+    }else{
+      var date = new Date(arrdata[xpos][0]);
+      var hours = date.getHours();
+      var minutes = date.getMinutes();
+      var seconds = date.getSeconds();
+      var formattedTime = hours*10000+ minutes*100+ seconds;
+      //console.log("test");
+      //console.log(arrdata[xpos][0]);
+      //console.log("date"+date);
+      //console.log("formattedTime"+formattedTime);
+      /*var minutes = "0"+date.getMinutes();
+      var seconds = "0"+date.getSeconds();
+      var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);*/
+      //console.log(formattedTime);
+      //console.log(minutes);
+      //console.log(seconds);
+      xVal = formattedTime;//arrdata[xpos][0];//formattedTime;
+      yVal = arrdata[xpos][1];
+    }
+    if(xpos<20){
+      xpos++;
+    }
+
+    //yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
+    //console.log(arrdata.length);
+    if(xpos<=arrdata.length){
+    dps.push({
+      x: xVal,
+      y: yVal
+    });
+    }
+    //xVal++;
+  }
+
+  if (dps.length > dataLength) {
+    dps.shift();
+  }
+  console.log(dps);
+  chart.render();
+};
+//====
 
   updateChart(dataLength);
-  setInterval(function(){updateChart()}, updateInterval);
-
+  setInterval(function(){updateChart(20)}, updateInterval);
   }
   </script>
 </head>
@@ -132,7 +277,17 @@ include 'notifutil.php'
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
-        <li class="breadcrumb-item active"><font color="#0080FF">Pump It Up!</font> Statistics</li>
+        <div class="col-3">
+          <li class="breadcrumb-item active"><font color="#0080FF">Pump It Up!</font> Statistics</li>
+        </div>
+        <div class="col-6">
+          </div>
+        <div class="col-3">
+          <span class="pull-right">
+          <button onclick="toggle()" class="btn btn-round btn-md btn-secondary">Pump it up!</button>
+        </span>
+        </div>
+
       </ol>
       <!-- Icon Cards-->
       <div class="row">
@@ -142,7 +297,9 @@ include 'notifutil.php'
               <div class="card-body-icon">
                 <i class="fa fa-fw fa-tint"></i>
               </div>
-              <div class="mr-5">Current Moisture : 9001</div>
+              <div class="mr-5">Current Moisture : <?php
+              echo GetLastest($user1json_a)[0]['values'][0][1];
+              ?></div>
             </div>
           </div>
         </div>
@@ -152,7 +309,12 @@ include 'notifutil.php'
               <div class="card-body-icon">
                 <i class="fa fa-fw fa-shower"></i>
               </div>
-              <div class="mr-5">Last Watered : XX/XX/XXXX XX:XX</div>
+              <div class="mr-5">Last Watered : <?php
+                echo date("d/m/y - G:i:s",GetLastWateredTimestamp($history_a));
+                //echo $history_a['queue'][3]['timestamp']==GetLastWateredTimestamp($history_a) ;
+                //PrintFormatTimeStamp($history_a['queue'][3]['timestamp'])
+                //PrintFormatTimeStamp(GetLastWateredTimestamp($history_a)/1000);
+              ?></div>
             </div>
           </div>
         </div>
@@ -162,7 +324,16 @@ include 'notifutil.php'
               <div class="card-body-icon">
                 <i class="fa fa-fw fa-cog"></i>
               </div>
-              <div class="mr-5">Current Mode : Manual</div>
+              <div class="mr-5">Automatic Watering : <?php
+                $tmp = GetUserSettings();
+                $mode = $tmp['mode'];
+                if($mode == 0){
+                    echo "OFF";
+                }
+                else{
+                    echo "ON";
+                }
+              ?></div>
             </div>
           </div>
         </div>
@@ -172,7 +343,9 @@ include 'notifutil.php'
               <div class="card-body-icon">
                 <i class="fa fa-fw fa-tachometer"></i>
               </div>
-              <div class="mr-5">Current Threshold : 9002</div>
+              <div class="mr-5">Current Threshold : <?php
+                echo $tmp['threshold'];
+              ?></div>
             </div>
           </div>
         </div>
@@ -191,39 +364,47 @@ include 'notifutil.php'
             <div class="card-header">
               <i class="fa fa-history"></i> History</div>
             <div class="list-group list-group-flush small">
-              <a class="list-group-item list-group-item-action" href="#">
+              <a class="list-group-item list-group-item-action">
+                <?php $current = $history_a['queue'][3]; ?>
                 <div class="media">
-                  <img class="d-flex mr-3 rounded-circle" src=<?php GetHistoryImg(0) ?> alt="">
+                  <img class="d-flex mr-3 rounded-circle" src=<?php GetHistoryImg($current['type']) ?> alt="">
                   <div class="media-body">
-                  <?php GetHistoryText(0) ?>
-                    <div class="text-muted smaller">Today at 5:43 PM - 5m ago</div>
+                  <?php GetHistoryText($current['type']);
+                   ?>
+                    <div class="text-muted smaller"><?php PrintFormatTimeStamp($current['timestamp']) ?></div>
                   </div>
                 </div>
               </a>
-              <a class="list-group-item list-group-item-action" href="#">
+              <a class="list-group-item list-group-item-action">
+                <?php $current = $history_a['queue'][2]; ?>
                 <div class="media">
-                  <img class="d-flex mr-3 rounded-circle" src="./../../stat/assets/image/imgnotif2.png" alt="">
+                  <img class="d-flex mr-3 rounded-circle" src=<?php GetHistoryImg($current['type']) ?> alt="">
                   <div class="media-body">
-                    <strong>Watered</strong> the plant
-                    <div class="text-muted smaller">Today at 4:37 PM - 1hr ago</div>
+                    <?php GetHistoryText($current['type']);
+                     ?>
+                      <div class="text-muted smaller"><?php PrintFormatTimeStamp($current['timestamp'])?></div>
                   </div>
                 </div>
               </a>
-              <a class="list-group-item list-group-item-action" href="#">
+              <a class="list-group-item list-group-item-action">
+                <?php $current = $history_a['queue'][1]; ?>
                 <div class="media">
-                  <img class="d-flex mr-3 rounded-circle" src="./../../stat/assets/image/imgnotif1.png" alt="">
+                  <img class="d-flex mr-3 rounded-circle" src=<?php GetHistoryImg($current['type']) ?> alt="">
                   <div class="media-body">
-                    The plant is <strong>dry!</strong>
-                    <div class="text-muted smaller">Today at 4:31 PM - 1hr ago</div>
+                    <?php GetHistoryText($current['type']);
+                     ?>
+                      <div class="text-muted smaller"><?php PrintFormatTimeStamp($current['timestamp']) ?></div>
                   </div>
                 </div>
               </a>
-              <a class="list-group-item list-group-item-action" href="#">
+              <a class="list-group-item list-group-item-action">
                 <div class="media">
-                  <img class="d-flex mr-3 rounded-circle" src="./../../stat/assets/image/imgnotif2.png" alt="">
+                  <?php $current = $history_a['queue'][0]; ?>
+                  <img class="d-flex mr-3 rounded-circle" src=<?php GetHistoryImg($current['type']) ?> alt="">
                   <div class="media-body">
-                    <strong>Watered</strong> the plant
-                    <div class="text-muted smaller">Today at 3:54 PM - 2hrs ago</div>
+                    <?php GetHistoryText($current['type']);
+                     ?>
+                      <div class="text-muted smaller"><?php PrintFormatTimeStamp($current['timestamp']) ?></div>
                   </div>
                 </div>
               </a>

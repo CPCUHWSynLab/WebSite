@@ -79,21 +79,17 @@
          data.queue.push(obj);
          data.queue.shift();
          $(document).ready(function() {
-            //function () {
-                var sendData = data;
-                console.log("send data = ");
-                console.log(sendData);
-                $.ajax({
-                    url: 'updatejson/updatehistory',    //Your api url
-                    type: 'POST',   //type is any HTTP method
-                    data: {
-                        data: sendData
-                    },      //Data as js object
-                    success: function () {
-                      console.log("sed lana");
-                    }
-                });
-              //}
+            var sendData = data;
+            $.ajax({
+                url: 'updatejson/updatehistory',    //Your api url
+                type: 'POST',   //type is any HTTP method
+                data: {
+                    data: sendData
+                },      //Data as js object
+                success: function () {
+                  console.log("success");
+                }
+            });
         });
      });
 

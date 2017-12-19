@@ -24,63 +24,63 @@ include 'notifutil.php'
   <link href="../../stat/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="../../stat/css/sb-admin.css" rel="stylesheet">
-  <script>
-  window.onload = function () {
+  <style>
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
 
-  var dps = []; // dataPoints
-  var chart = new CanvasJS.Chart("chartContainer", {
-  	title :{
-  		text: "Humidity",
-      fontFamily: "TH SarabunPSK",
-      fontWeight: "bold",
-      fontSize: 45
-  	},
-    axisX: {
-      labelFontFamily: "TH SarabunPSK",
-      labelFontSize: 18
-    },
-  	axisY: {
-      labelFontFamily: "TH SarabunPSK",
-      labelFontSize: 18,
-  		includeZero: false
-  	},
-  	data: [{
-  		type: "splineArea",
-      color: "rgba(54,158,173,.7)",
-  		dataPoints: dps
-  	}]
-  });
+.switch input {display:none;}
 
-  var xVal = 0;
-  var yVal = 100;
-  var updateInterval = 1000;
-  var dataLength = 20; // number of dataPoints visible at any point
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
 
-  var updateChart = function (count) {
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
 
-  	count = count || 1;
+input:checked + .slider {
+  background-color: #2196F3;
+}
 
-  	for (var j = 0; j < count; j++) {
-  		yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
-  		dps.push({
-  			x: xVal,
-  			y: yVal
-  		});
-  		xVal++;
-  	}
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
 
-  	if (dps.length > dataLength) {
-  		dps.shift();
-  	}
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
 
-  	chart.render();
-  };
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
 
-  updateChart(dataLength);
-  setInterval(function(){updateChart()}, updateInterval);
-
-  }
-  </script>
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -133,8 +133,17 @@ include 'notifutil.php'
         <li class="breadcrumb-item active"><font color="#0080FF">Pump It Up!</font> Settings</li>
       </ol>
       <!-- Icon Cards-->
-	  
-      
+
+      <?php
+            if(isset($error_message)){
+                echo "<div class='alert alert-danger'>";
+                  if (isset($error_message)) {
+                  echo $error_message;
+                  }
+                  echo "</div>";
+            }
+      ?>
+
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
@@ -147,18 +156,24 @@ include 'notifutil.php'
     <!-- Scroll to Top Button-->
     <div class="container">
 	<h4>Select Watering Mode</h4>
-  <form>
+  <form action="/index.php/updatejson/updatesettings" method="POST">
     <div class="form-group">
-		<div class="radio">
-			<label><input type="radio" name="mode"> Manual</label>
-		</div>
-		<div class="radio">
-			<label><input type="radio" name="mode"> Automatic</label>
-		</div>
+      <label class="switch">
+        <?php
+          $tmp = GetUserSettings();
+          $checked = "";
+          $value = $tmp['threshold'];
+          if($tmp['mode']==1){
+            $checked = "checked";
+          }
+        ?>
+        <input type="checkbox"<?php echo $checked; ?> name = "mode">
+      <span class="slider round"></span>
+      </label>
     </div>
     <div class="form-group">
 	  <h4>Threshold</h4>
-      <input type="number" class="form-control" id="thres" placeholder="Preferred Threshold">
+      <input name="threshold" type="number" class="form-control" id="thres" value = <?php echo $value; ?> placeholder="Preferred Threshold" required>
     </div>
     <button type="submit" class="btn btn-default">Submit</button>
   </form>
