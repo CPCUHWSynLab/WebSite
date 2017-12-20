@@ -27,53 +27,54 @@ public function urlrequest(){
   {
           echo 'File written!';
   }
-  // $string = file_get_contents("./data/user1settings.json");
-  // $settings = json_decode($string, true);
-  // $settings = $settings['settings'];
-  // if($data['lastest_data'][0]['values'][1] < $settings['threshold']){
-  //   if($settings['mode'] == 0){ //manual mode
-  //     $histqueuefile = file_get_contents("./data/histqueue.json");
-  //     $histqueue = json_decode($histqueuefile, true);
-  //     $histqueue = $histqueue['queue'];
-  //     $arr = array(
-  //       "type" => 0,
-  //       "timestamp" => $data['lastest_data'][0][0]
-  //     );
-  //     array_push($histqueue, $arr);
-  //     array_shift($histqueue);
-  //     $write_data = json_encode(array("queue" => $histqueue));
-  //     if ( ! write_file('./data/histqueue.json', $write_data)){echo 'Unable to write histqueue';}
-  //     else{echo 'Histqueue written!';}
-  //   }
-  //   else{     //automatic mode
-  //     $this->load->library('curl');
-  //     $options = array(CURLOPT_URL => 'api.netpie.io/microgear/CPCUHWSynLab/pieled',
-  //                CURLOPT_HEADER => false,
-  //                CURLOPT_POSTFIELDS => 1
-  //               );
-  //     $params = array("auth" => "L5NiGlMSwnpT1Gv:OAhEC66LXmLiBst6tG1nUZxNb");
-  //     $this->curl->put($params, $options);
-  //     $histqueuefile = file_get_contents("./data/histqueue.json");
-  //     $histqueue = json_decode($histqueuefile, true);
-  //     $histqueue = $histqueue['queue'];
-  //     $arr = array(
-  //       "type" => 1,
-  //       "timestamp" => $data['lastest_data'][0][0]
-  //     );
-  //     array_push($histqueue, $arr);
-  //     array_shift($histqueue);
-  //     $write_data = json_encode(array("queue" => $histqueue));
-  //     if ( ! write_file('./data/histqueue.json', $write_data)){echo 'Unable to write histqueue';}
-  //     else{echo 'Histqueue written!';}
-  //     sleep(1);
-  //     $options = array(CURLOPT_URL => 'api.netpie.io/microgear/CPCUHWSynLab/pieled',
-  //                CURLOPT_HEADER => false,
-  //                CURLOPT_POSTFIELDS => 0
-  //               );
-  //     $params = array("auth" => "L5NiGlMSwnpT1Gv:OAhEC66LXmLiBst6tG1nUZxNb");
-  //     $this->curl->put($params, $options);
-  //   }
-  // }
+  $string = file_get_contents("./data/user1settings.json");
+  $settings = json_decode($string, true);
+  $data = json_decode($data, true);
+  $settings = $settings['settings'];
+  if($data['lastest_data'][0]['values'][0][1] < $settings['threshold']){
+    if($settings['mode'] == 0){ //manual mode
+      $histqueuefile = file_get_contents("./data/histqueue.json");
+      $histqueue = json_decode($histqueuefile, true);
+      $watered = $histqueue['last_watered'];
+      $histqueue = $histqueue['queue'];
+      $arr = array(
+        "type" => 0,
+        "timestamp" => time()
+      );
+      array_push($histqueue, $arr);
+      array_shift($histqueue);
+      $write_data = json_encode(array("queue" => $histqueue,  "last_watered" => $watered));
+      if ( ! write_file('./data/histqueue.json', $write_data)){echo 'Unable to write histqueue';}
+      else{echo 'Histqueue written!';}
+    }
+    else{     //automatic mode
+      $data = "1";
+      $ch = curl_init("https://api.netpie.io/microgear/CPCUSoilhumidity/pieled?auth=L5NiGlMSwnpT1Gv:OAhEC66LXmLiBst6tG1nUZxNb");
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+      curl_setopt($ch, CURLOPT_POSTFIELDS,$data);
+      curl_setopt($ch,CURLOPT_SSL_VERIFYPEER, false);
+      $response = curl_exec($ch);
+      if (!$response)
+      {
+          print_r("cURL no response");
+      }
+      $histqueuefile = file_get_contents("./data/histqueue.json");
+      $histqueue = json_decode($histqueuefile, true);
+      $watered = $histqueue['last_watered'];
+      $histqueue = $histqueue['queue'];
+      $new_water = time();
+      $arr = array(
+        "type" => 1,
+        "timestamp" => $new_water
+      );
+      array_push($histqueue, $arr);
+      array_shift($histqueue);
+      $write_data = json_encode(array("queue" => $histqueue, "last_watered" => $new_water));
+      if ( ! write_file('./data/histqueue.json', $write_data)){echo 'Unable to write histqueue';}
+      else{echo 'Histqueue written!';}
+    }
+  }
 }
 
 public function updatesettings(){
