@@ -27,6 +27,7 @@ include 'notifutil.php'
   <!-- Custom styles for this template-->
   <link href="../../stat/css/sb-admin.css" rel="stylesheet">
   <script src="https://cdn.netpie.io/microgear.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script>
     const APPID = "CPCUHWSynLab";
     const KEY = "L5NiGlMSwnpT1Gv";
@@ -78,7 +79,7 @@ include 'notifutil.php'
    // microgear.chat('pieled/state','0');
   }
    microgear.on('message',function(topic,msg) {
-     
+
     });
       microgear.on('connected', function() {
       microgear.setAlias(ALIAS);
@@ -117,7 +118,7 @@ include 'notifutil.php'
 
   var xVal=0;
   var yVal=100;
-  var updateInterval = 1000;
+  var updateInterval = 15000;
   var dataLength = 20; // number of dataPoints visible at any point
 
   function readTextFile(file, callback) {
@@ -131,119 +132,53 @@ include 'notifutil.php'
     }
     rawFile.send(null);
   }
-
-
-//======
-  /*var updateChart = function (count) {
-    readTextFile("../../data/user1JSON.json", function(text){
-        var data = JSON.parse(text);
-        var arrdata = data.data[0].values;
-        arrdata.push(data.lastest_data[0].values[0]);
-        dps = [];
-        var i = 0;
-        for (var j = 0; j < 20 && arrdata.length != 0 ; j++) {
-          xVal = arrdata[arrdata.length-1][0];
-          yVal = arrdata[arrdata.length-1][1];
-          var date = new Date(xVal*1000);
-          var hours = date.getHours();
-          var minutes = "0"+date.getMinutes();
-          var seconds = "0"+date.getSeconds();
-          var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-          var tmp = {};
-          tmp.x = formattedTime;
-          tmp.y = yVal;
-          dps.push(tmp);
-          arrdata.pop();
-      	}
-        if (dps.length > dataLength) {
-      		dps.shift();
-      	}
-        console.log(dps);
-      	chart.render();
-    });
-  };*/
-//====
 var arrdata=[];
-// var xpos=0;
 var updateChart = function (count) {
-
   count = count || 1;
-
   readTextFile("../../data/user1JSON.json", function(text){
       var data = JSON.parse(text);
       arrdata = data.data[0].values;
       arrdata.push(data.lastest_data[0].values[0]);
-      //console.log(arrdata);
-      //dps = [];
-      //var i = 0;
-    });
-  console.log(arrdata.length);
+  });
   if(dps[0] == null){
     for (var j = 0; j < count && arrdata.length != 0; j++) {
-      // if(xpos>=arrdata.length){
-      //   // xVal = 0;
-      //   // yVal = 0;
-      // }else{
         var pos = (arrdata.length - count) + j;
         var date = new Date(arrdata[pos][0]);
         var hours = date.getHours();
         var minutes = date.getMinutes();
         var seconds = date.getSeconds();
         var formattedTime = hours*10000+ minutes*100+ seconds;
-        //console.log("test");
-        //console.log(arrdata[xpos][0]);
-        //console.log("date"+date);
-        //console.log("formattedTime"+formattedTime);
-        /*var minutes = "0"+date.getMinutes();
-        var seconds = "0"+date.getSeconds();
-        var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);*/
-        //console.log(formattedTime);
-        //console.log(minutes);
-        //console.log(seconds);
         xVal = formattedTime;//arrdata[xpos][0];//formattedTime;
         yVal = arrdata[pos][1];
-      // }
-      // if(xpos<20){
-      //   xpos++;
-      // }
-
-      //yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
-      //console.log(arrdata.length);
       if(pos<arrdata.length){
         dps.push({
           x: xVal,
           y: yVal
         });
       }
-      //xVal++;
     }
   }
-  // else{
-  //   if(arrdata[arrdata.length][0]!=dps[dps.length-1][0]){
-  //     var date = new Date(arrdata[dps.length][0]);
-  //     var hours = date.getHours();
-  //     var minutes = date.getMinutes();
-  //     var seconds = date.getSeconds();
-  //     var formattedTime = hours*10000+ minutes*100+ seconds;
-  //     xVal = formattedTime;//arrdata[xpos][0];//formattedTime;
-  //     yVal = arrdata[dps.length][1];
-  //     dps.push({
-  //           x: xVal,
-  //           y: yVal
-  //     });
-  //   }
-  // }
-  // if (dps.length > dataLength) {
-  //   dps.shift();
-  // }
-  console.log(dps.length);
   chart.render();
 };
-//====
-
   updateChart(dataLength);
   setInterval(function(){updateChart(20)}, updateInterval);
   }
+  var interval = 15000;  // 1000 = 1 second, 3000 = 3 seconds
+  function doAjax() {
+      $.ajax({
+              type: 'GET',
+              url: '../updatejson/urlrequest',
+              data: $(this).serialize(),
+              success: function (data) {
+                    console.log("updated requesturl");
+              },
+              complete: function (data) {
+                      // Schedule the next
+                      setTimeout(doAjax, interval);
+              }
+      });
+  }
+  setTimeout(doAjax, interval);
   </script>
 </head>
 
@@ -295,13 +230,13 @@ var updateChart = function (count) {
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <div class="col-3">
-          <li class="breadcrumb-item active"><font color="#0080FF">Pump It Up!</font> Statistics</li>
+          <li class="breadcrumb-item active"><font size="5">Statistics</font></li>
         </div>
         <div class="col-6">
           </div>
         <div class="col-3">
           <span class="pull-right">
-          <button onclick="toggle()" class="btn btn-round btn-md btn-secondary">Pump it up!</button>
+          <button onclick="toggle()" class="btn btn-round btn-md btn-secondary">Pump It Up!</button>
         </span>
         </div>
 
@@ -327,10 +262,7 @@ var updateChart = function (count) {
                 <i class="fa fa-fw fa-shower"></i>
               </div>
               <div class="mr-5">Last Watered : <?php
-                echo date("d/m/y - G:i:s",GetLastWateredTimestamp($history_a));
-                //echo $history_a['queue'][3]['timestamp']==GetLastWateredTimestamp($history_a) ;
-                //PrintFormatTimeStamp($history_a['queue'][3]['timestamp'])
-                //PrintFormatTimeStamp(GetLastWateredTimestamp($history_a)/1000);
+                echo date("d/m/y - G:i:s",(int)GetLastWateredTimestamp($history_a)+21600);
               ?></div>
             </div>
           </div>
@@ -388,7 +320,7 @@ var updateChart = function (count) {
                   <div class="media-body">
                   <?php GetHistoryText($current['type']);
                    ?>
-                    <div class="text-muted smaller"><?php PrintFormatTimeStamp($current['timestamp']) ?></div>
+                    <div class="text-muted smaller"><?php PrintFormatTimeStamp(((int)$current['timestamp']+21600)) ?></div>
                   </div>
                 </div>
               </a>
@@ -399,7 +331,7 @@ var updateChart = function (count) {
                   <div class="media-body">
                     <?php GetHistoryText($current['type']);
                      ?>
-                      <div class="text-muted smaller"><?php PrintFormatTimeStamp($current['timestamp'])?></div>
+                      <div class="text-muted smaller"><?php PrintFormatTimeStamp(((int)$current['timestamp']+21600))?></div>
                   </div>
                 </div>
               </a>
@@ -410,7 +342,7 @@ var updateChart = function (count) {
                   <div class="media-body">
                     <?php GetHistoryText($current['type']);
                      ?>
-                      <div class="text-muted smaller"><?php PrintFormatTimeStamp($current['timestamp']) ?></div>
+                      <div class="text-muted smaller"><?php PrintFormatTimeStamp(((int)$current['timestamp']+21600)) ?></div>
                   </div>
                 </div>
               </a>
@@ -421,7 +353,7 @@ var updateChart = function (count) {
                   <div class="media-body">
                     <?php GetHistoryText($current['type']);
                      ?>
-                      <div class="text-muted smaller"><?php PrintFormatTimeStamp($current['timestamp']) ?></div>
+                      <div class="text-muted smaller"><?php PrintFormatTimeStamp(((int)$current['timestamp']+21600)) ?></div>
                   </div>
                 </div>
               </a>
