@@ -26,6 +26,7 @@ include 'notifutil.php'
   <link href="../../stat/css/sb-admin.css" rel="stylesheet">
   <script src="https://cdn.netpie.io/microgear.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
   <script>
     const APPID = "CPCUHWSynLab";
     const KEY = "L5NiGlMSwnpT1Gv";
@@ -53,6 +54,7 @@ include 'notifutil.php'
    microgear.chat('pieled','1');
    readTextFile("../../data/histqueue.json", function(text){
        var data = JSON.parse(text);
+       document.getElementById("watered").innerHTML = "Last Watered : "+moment().format('DD/MM/YY - HH:mm:ss');
        console.log(data.queue);
        var obj = {};
        obj.type = 1;
@@ -97,7 +99,6 @@ include 'notifutil.php'
       fontSize: 45
   	},
     axisX: {
-      valueFormatString: "00:00:00",
       labelFontFamily: "TH SarabunPSK",
       labelFontSize: 18
     },
@@ -108,6 +109,7 @@ include 'notifutil.php'
   	},
   	data: [{
   		type: "splineArea",
+      xValueType: "dateTime",
       color: "rgba(54,158,173,.7)",
   		dataPoints: dps
   	}]
@@ -129,50 +131,102 @@ include 'notifutil.php'
     }
     rawFile.send(null);
   }
-var arrdata=[];
-var updateChart = function (count) {
-  count = count || 1;
-  readTextFile("../../data/user1JSON.json", function(text){
-      var data = JSON.parse(text);
-      arrdata = data.data[0].values;
-      arrdata.push(data.lastest_data[0].values[0]);
-      console.log(arrdata.length);
-      if(arrdata.length<=count){
-        for (var j = 0; j < arrdata.length ; j++) {
-          var date = new Date(arrdata[j][0]);
-          var hours = date.getHours();
-          var minutes = date.getMinutes();
-          var seconds = date.getSeconds();
-          var formattedTime = hours*10000+ minutes*100+ seconds;
-          xVal = formattedTime;//arrdata[xpos][0];//formattedTime;
-          yVal = arrdata[j][1];
-          dps.push({
-            x: xVal,
-            y: yVal
-          });
-          console.log(dps.length);
-        }
-      }else{
-        for (var j = 0; j < count ; j++) {
-          var pos = arrdata.length - count + j;
-          var date = new Date(arrdata[pos][0]);
-          var hours = date.getHours();
-          var minutes = date.getMinutes();
-          var seconds = date.getSeconds();
-          var formattedTime = hours*10000+ minutes*100+ seconds;
-          xVal = formattedTime;//arrdata[xpos][0];//formattedTime;
-          yVal = arrdata[pos][1];
-          dps.push({
-            x: xVal,
-            y: yVal
-          });
-          console.log(dps.length);
+  var manageDpsLenLess = function(){
+    return new Promise(function(resolve, reject){
+      console.log("kao if na");
+      var flag = false;
+      if(dps == []){
+        flag = true;
+      }
+      var len;
+      if(flag){
+        len = 0;
+      }
+      else{
+        len = dps.length;
+      }
+      var tmp = [];
+      for (var j = 0; j < arrdata.length ; j++) {
+        xVal = arrdata[pos][0];
+        yVal = arrdata[j][1];
+        dps.push({
+          x: xVal,
+          y: yVal
+        });
+        if(j+1 == arrdata.length){
+          resolve();
         }
       }
-      chart.render();
-      dps = [];
+      if(!flag){
+        for(var i=0;i<len;i++){
+          dps.shift();
+        }
+      }
     });
-}
+  }
+  var manageDpsLenEqual = function(count){
+    return new Promise(function(resolve, reject){
+      console.log("kao else na");
+      var flag = false;
+      if(dps == []){
+        flag = true;
+      }
+      var len;
+      if(flag){
+        len = 0;
+      }
+      else{
+        len = dps.length;
+      }
+      var tmp = [];
+      for (var j = 0; j < count ; j++) {
+        var pos = arrdata.length - count + j;
+        xVal = arrdata[pos][0];
+        yVal = arrdata[pos][1];
+        dps.push({
+          x: xVal,
+          y: yVal
+        });
+        if(j+1 == count){
+          // dps = tmp;
+          // console.log('sed la na else');
+          resolve();
+        }
+      }
+      if(!flag){
+        for(var i=0;i<len;i++){
+          dps.shift();
+        }
+      }
+    });
+  }
+var arrdata=[];
+var updateChart = function (count) {
+    readTextFile("../../data/user1JSON.json", function(text){
+        var data = JSON.parse(text);
+        arrdata = data.data[0].values;
+        arrdata.push(data.lastest_data[0].values[0]);
+        if(arrdata.length<=count){
+          manageDpsLenLess().then(function(){
+              document.getElementById("moisture").innerHTML="Current Moisture : "+arrdata[arrdata.length-1][1];
+              readTextFile("../../data/histqueue.json",function(histtext){
+                histdata = JSON.parse(histtext);
+                document.getElementById("watered").innerHTML = "Last Watered : "+moment.unix(histdata.last_watered).format('DD/MM/YY - HH:mm:ss');
+              });
+              chart.render();
+          });
+        }else{
+          manageDpsLenEqual(count).then(function(){
+              document.getElementById("moisture").innerHTML="Current Moisture : "+arrdata[arrdata.length-1][1];
+              readTextFile("../../data/histqueue.json",function(histtext){
+                histdata = JSON.parse(histtext);
+                document.getElementById("watered").innerHTML = "Last Watered : "+moment.unix(histdata.last_watered).format('DD/MM/YY - HH:mm:ss');
+              });
+              chart.render();
+          });
+        }
+      });
+  }
   updateChart(dataLength);
   setInterval(function(){updateChart(dataLength)}, updateInterval);
   }
@@ -223,13 +277,13 @@ var updateChart = function (count) {
           </a>
         </li>
       </ul>
-      <ul class="navbar-nav sidenav-toggler">
+      <!-- <ul class="navbar-nav sidenav-toggler">
         <li class="nav-item">
           <a class="nav-link text-center" id="sidenavToggler">
             <i class="fa fa-fw fa-angle-left"></i>
           </a>
         </li>
-      </ul>
+      </ul> -->
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
@@ -262,7 +316,7 @@ var updateChart = function (count) {
               <div class="card-body-icon">
                 <i class="fa fa-fw fa-tint"></i>
               </div>
-              <div class="mr-5">Current Moisture : <?php
+              <div class="mr-5" id="moisture">Current Moisture : <?php
               echo GetLastest($user1json_a)[0]['values'][0][1];
               ?></div>
             </div>
@@ -274,7 +328,7 @@ var updateChart = function (count) {
               <div class="card-body-icon">
                 <i class="fa fa-fw fa-shower"></i>
               </div>
-              <div class="mr-5">Last Watered : <?php
+              <div class="mr-5" id="watered">Last Watered : <?php
                 echo date("d/m/y - G:i:s",(int)GetLastWateredTimestamp($history_a)+21600);
               ?></div>
             </div>
@@ -371,7 +425,7 @@ var updateChart = function (count) {
                 </div>
               </a>
             </div>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+            <div class="card-footer small text-muted">Updated on <?php echo date("D j M G:i:s", time()+21600); ?></div>
           </div>
         </div>
       </div>
