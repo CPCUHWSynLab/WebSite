@@ -139,29 +139,45 @@ var updateChart = function (count) {
       var data = JSON.parse(text);
       arrdata = data.data[0].values;
       arrdata.push(data.lastest_data[0].values[0]);
-  });
-  if(dps[0] == null){
-    for (var j = 0; j < count && arrdata.length != 0; j++) {
-        var pos = (arrdata.length - count) + j;
-        var date = new Date(arrdata[pos][0]);
-        var hours = date.getHours();
-        var minutes = date.getMinutes();
-        var seconds = date.getSeconds();
-        var formattedTime = hours*10000+ minutes*100+ seconds;
-        xVal = formattedTime;//arrdata[xpos][0];//formattedTime;
-        yVal = arrdata[pos][1];
-      if(pos<arrdata.length){
-        dps.push({
-          x: xVal,
-          y: yVal
-        });
+      console.log(arrdata.length);
+      if(arrdata.length<=count){
+        for (var j = 0; j < arrdata.length ; j++) {
+          var date = new Date(arrdata[j][0]);
+          var hours = date.getHours();
+          var minutes = date.getMinutes();
+          var seconds = date.getSeconds();
+          var formattedTime = hours*10000+ minutes*100+ seconds;
+          xVal = formattedTime;//arrdata[xpos][0];//formattedTime;
+          yVal = arrdata[j][1];
+          dps.push({
+            x: xVal,
+            y: yVal
+          });
+          console.log(dps.length);
+        }
+      }else{
+        for (var j = 0; j < count ; j++) {
+          var pos = arrdata.length - count + j;
+          var date = new Date(arrdata[pos][0]);
+          var hours = date.getHours();
+          var minutes = date.getMinutes();
+          var seconds = date.getSeconds();
+          var formattedTime = hours*10000+ minutes*100+ seconds;
+          xVal = formattedTime;//arrdata[xpos][0];//formattedTime;
+          yVal = arrdata[pos][1];
+          dps.push({
+            x: xVal,
+            y: yVal
+          });
+          console.log(dps.length);
+        }
       }
-    }
-  }
-  chart.render();
-};
+      chart.render();
+      dps = [];
+    });
+}
   updateChart(dataLength);
-  setInterval(function(){updateChart(20)}, updateInterval);
+  setInterval(function(){updateChart(dataLength)}, updateInterval);
   }
   var interval = 15000;  // 1000 = 1 second, 3000 = 3 seconds
   function doAjax() {
