@@ -49,7 +49,7 @@ public function urlrequest(){
     }
     else{     //automatic mode
       $data = "1";
-      $ch = curl_init("https://api.netpie.io/microgear/CPCUSoilhumidity/pieled?auth=L5NiGlMSwnpT1Gv:OAhEC66LXmLiBst6tG1nUZxNb");
+      $ch = curl_init("https://api.netpie.io/microgear/CPCUHWSynLab/pieled?auth=L5NiGlMSwnpT1Gv:OAhEC66LXmLiBst6tG1nUZxNb");
       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
       curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
       curl_setopt($ch, CURLOPT_POSTFIELDS,$data);

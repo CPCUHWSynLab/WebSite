@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <?php
@@ -76,7 +74,6 @@ include 'notifutil.php'
           });
       });
    });
-   // microgear.chat('pieled/state','0');
   }
    microgear.on('message',function(topic,msg) {
 
@@ -426,5 +423,4 @@ var updateChart = function (count) {
     <script src="../../stat/js/sb-admin-charts.min.js"></script>
   </div>
 </body>
-
 </html>

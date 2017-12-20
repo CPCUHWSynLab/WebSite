@@ -155,7 +155,7 @@ input:checked + .slider:before {
     </footer>
     <!-- Scroll to Top Button-->
     <div class="container">
-	<h4>Select Watering Mode</h4>
+	<h4>Automatic watering</h4>
   <form action="/index.php/updatejson/updatesettings" method="POST">
     <div class="form-group">
       <label class="switch">
